@@ -1,5 +1,6 @@
 package com.example.view.controller;
 
+import com.example.view.member.InsertController;
 import com.example.view.member.LoginController;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class HandlerMapping {
         this.mappings = new HashMap<String, Controller>();
 
         this.mappings.put("/login.do", new LoginController());
+        this.mappings.put("/insert.do", new InsertController());
     }
 
     public Controller getController(String command) {

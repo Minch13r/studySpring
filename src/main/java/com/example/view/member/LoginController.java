@@ -24,7 +24,6 @@ public class LoginController implements Controller {
 
         memberVO.setMid(request.getParameter("mid"));
         memberVO.setMpw(request.getParameter("mpw"));
-        memberVO = memberDAO.getBoard(memberVO);
         // 페이지 이동 처리
         if(memberService.getMember(memberVO) != null) {
             return "main.do";
