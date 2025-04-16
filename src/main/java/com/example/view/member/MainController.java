@@ -27,11 +27,7 @@ public class MainController implements Controller {
         System.out.println("Main Controller executed");
 
         BoardVO boardVO = new BoardVO();
-        BoardDAO boardDAO = new BoardDAO();
-
         MemberVO memberVO = new MemberVO();
-        MemberDAO memberDAO = new MemberDAO();
-
 
         memberVO.setMid(request.getParameter("mid"));
         memberVO.setMpw(request.getParameter("mpw"));
@@ -40,8 +36,11 @@ public class MainController implements Controller {
         boardVO.setBid(Integer.parseInt(request.getParameter("bid")));
         if(boardService.getBoard(boardVO) != null) {
             request.setAttribute("boardVO", boardVO);
+            // 상세페이지 보기
             return "detail";
-        } else {
+        }
+        // 안되면 메인 유지
+        else {
             return "main.do";
         }
 
@@ -49,13 +48,19 @@ public class MainController implements Controller {
         // 글작성 페이지 보기
         if(memberService.getMember(memberVO) != null) {
             request.setAttribute("memberVO", memberVO);
+            // 글 작성 페이지로 이동
             return "insert";
-        } else {
+        }
+        // 안되면 메인 유지
+        else {
             return "main.do";
         }
 
         // 로그아웃
+        // 세션 비우기
         session.invalidate();
         return "login";
+
+        // 페이지 이동은 있다고 치고.. 기능만....
     }
 }

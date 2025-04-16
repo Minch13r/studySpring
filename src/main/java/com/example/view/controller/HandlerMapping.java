@@ -1,5 +1,6 @@
 package com.example.view.controller;
 
+import com.example.view.member.DetailController;
 import com.example.view.member.InsertController;
 import com.example.view.member.LoginController;
 
@@ -15,6 +16,7 @@ public class HandlerMapping {
 
         this.mappings.put("/login.do", new LoginController());
         this.mappings.put("/insert.do", new InsertController());
+        this.mappings.put("/detail.do", new DetailController())
     }
 
     public Controller getController(String command) {

@@ -19,7 +19,6 @@ public class InsertController implements Controller {
         System.out.println("Insert Controller executed");
 
         BoardVO boardVO = new BoardVO();
-        BoardDAO boardDAO = new BoardDAO();
 
         boardVO.setWriter(request.getParameter("writer"));
         boardVO.setTitle(request.getParameter("title"));
