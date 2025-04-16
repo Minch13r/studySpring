@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:component-scan base-package="com.example"/>
+
+    <!-- Apple apple = new Apple(); -->
+    <!-- 달라야 하는 객체인 경우 scope="prototype" 적용 -->
+<!--    <bean class="demo.Apple" id="apple"/>-->
+
+    <!-- 메모리에 저장된 타입을 스스로 기억하고 있음 -->
+<!--    <bean class="demo.Kiwi" id="kiwi"/>-->
+
+
+
+    <!-- SamsungRemote -->
+    <!-- 이게 new 하는 코드 -->
+    <bean id="samsungRemote" class="test.SamsungRemote"/>
+
+    <!-- SamsungTV 생성자 주입 -->
+    <bean id="samsungTV" class="test.SamsungTV">
+        <constructor-arg ref="samsungRemote"/>
+    </bean>
+
+
+    <!-- LgRemote -->
+    <bean id="lgRemote" class="test.LgRemote"/>
+
+    <!-- LgTV setter 주입 -->
+    <bean id="lgTV" class="test.LgTV">
+        <property name="remote" ref="lgRemote"/>
+    </bean>
+    <!-- lazy-init은 빈이 필요한 시점에만 생성-->
+
+</beans>
