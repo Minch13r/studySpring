@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!--  HandlerMapping 코드임  -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/login.do">login</prop>
+                <prop key="/logout.do">logout</prop>
+                <prop key="/insert.do">insert</prop>
+                <prop key="/insertPage.do">insertPage</prop>
+                <prop key="/main.do">main</prop>
+                <prop key="/update.do">update</prop>
+                <prop key="/board.do">board</prop>
+                <prop key="/delete.do">delete</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--  HandlerMapping 코드임  -->
+    <bean class="com.example.view.member.LoginController" id="login" />
+    <bean class="com.example.view.member.LogoutController" id="logout" />
+    <bean class="com.example.view.board.BoardController" id="board" />
+    <bean class="com.example.view.board.DeleteController" id="delete" />
+    <bean class="com.example.view.board.MainController" id="main" />
+    <bean class="com.example.view.board.UpdateController" id="update" />
+    <bean class="com.example.view.board.InsertController" id="insert" />
+    <bean class="com.example.view.board.InsertPageController" id="insertPage" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+</beans>
