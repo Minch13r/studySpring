@@ -7,17 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
-@Component
-public class InsertPageController implements Controller {
+@Controller
+public class InsertPageController {
     @Autowired
     private BoardService boardService;
     @Autowired
     private HttpSession session;
 
-    @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         BoardVO boardVO = new BoardVO();
 

@@ -12,7 +12,7 @@
 
 <hr>
 
-<a href="insertPage.do">글 작성하기</a> <br>
+<a href="insert.do">글 작성하기</a> <br>
 <a href="logout.do">로그아웃</a>
 
 </body>

@@ -9,6 +9,7 @@
                      http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <!--  HandlerMapping 코드임  -->
+    <!--
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
@@ -23,8 +24,13 @@
             </props>
         </property>
     </bean>
+    -->
+
+    <context:component-scan base-package="com.example.view.member"/>
+    <context:component-scan base-package="com.example.view.board"/>
 
     <!--  HandlerMapping 코드임  -->
+    <!--
     <bean class="com.example.view.member.LoginController" id="login" />
     <bean class="com.example.view.member.LogoutController" id="logout" />
     <bean class="com.example.view.board.BoardController" id="board" />
@@ -33,6 +39,7 @@
     <bean class="com.example.view.board.UpdateController" id="update" />
     <bean class="com.example.view.board.InsertController" id="insert" />
     <bean class="com.example.view.board.InsertPageController" id="insertPage" />
+    -->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property name="prefix" value="" />

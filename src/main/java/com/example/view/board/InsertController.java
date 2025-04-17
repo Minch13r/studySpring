@@ -3,36 +3,32 @@ package com.example.view.board;
 import com.example.biz.board.BoardService;
 import com.example.biz.board.BoardVO;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@Component
-public class InsertController implements Controller {
+@Controller
+public class InsertController {
     @Autowired
     private BoardService boardService;
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @PostMapping("/insert.do")
+    public String insert(BoardVO boardVO, HttpServletRequest request){
         System.out.println("Insert Controller executed");
-
-        BoardVO boardVO = new BoardVO();
 
         boardVO.setWriter(request.getParameter("writer"));
         boardVO.setTitle(request.getParameter("title"));
         boardVO.setContent(request.getParameter("content"));
 
-        ModelAndView mav = new ModelAndView();
         if(boardService.insert(boardVO)){
-//            return "insert.do";
-            mav.setViewName("redirect:insert.do");
+            return "redirect:main.do";
         }
-        else {
-//            return "main.do";
-            mav.setViewName("redirect:main.do");
-        }
-        return mav;
+        return "redirect:insert.do";
+    }
+
+    @GetMapping("/insert.do")
+    public String insertPage(){
+        return "insert.jsp";
     }
 }
