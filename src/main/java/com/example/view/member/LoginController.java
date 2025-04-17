@@ -42,6 +42,7 @@ public class LoginController implements Controller {
         // 로그인 실패시 로그인페이지 유지
         else {
 //            return "login"; // .jsp 를 자동으로 붙여줌
+            mav.addObject("member", memberVO);
             mav.setViewName("login");
         }
         return mav;
