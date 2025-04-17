@@ -8,9 +8,12 @@
 </head>
 <body>
 
-1. 상세페이지 보여줘.
-2. 글작성페이지로 이동시켜줘.
-3. 로그아웃해줘.
+글 목록 출력 >> 글 상세페이지로 이동
+
+<hr>
+
+<a href="insertPage.do">글 작성하기</a> <br>
+<a href="logout.do">로그아웃</a>
 
 </body>
 </html>
