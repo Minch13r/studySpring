@@ -116,13 +116,13 @@
             <!-- Around Advice -->
             <aop:around method="aroundLog" pointcut-ref="bPointcut" />
 
-            <!-- After Returning Advice -->
+            <!-- After-Returning Advice -->
             <aop:after-returning method="afterReturningLog" pointcut-ref="aPointcut" returning="returnObj" />
 
-            <!-- After Throwing Advice -->
+            <!-- After-Throwing Advice -->
             <aop:after-throwing method="afterThrowingLog" pointcut-ref="aPointcut" throwing="exceptObj" />
 
-            <!-- After Advice (LogAdvice22의 기능) -->
+            <!-- After Advice -->
             <aop:after method="printLog22" pointcut-ref="bPointcut" />
 
             <!-- 회원가입 관련 Advice -->
