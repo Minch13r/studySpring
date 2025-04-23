@@ -5,7 +5,7 @@ import java.sql.*;
 public class JDBCUtil {
     static final String driverName = "oracle.jdbc.driver.OracleDriver";
     static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    static final String userName = "C##ROOT";
+    static final String userName = "C##TEST";
     static final String password = "1234";
 
     public static Connection connect(){
