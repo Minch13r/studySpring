@@ -39,11 +39,11 @@
 <!--    </bean>-->
 <!--    &lt;!&ndash; lazy-init은 빈이 필요한 시점에만 생성&ndash;&gt;-->
 
-    <bean class="com.example.common.LogAdvice" id="LogAdvice" />
-    <bean class="com.example.common.LogAdvice22" id="LogAdvice22" />
-    <bean class="com.example.common.ReturningAdvice" id="ra" />
-    <bean class="com.example.common.ThrowingAdvice" id="ta" />
-    <bean class="com.example.common.AroundAdvice" id="aa" />
+    <bean class="com.example.biz.common.LogAdvice" id="LogAdvice" />
+    <bean class="com.example.biz.common.LogAdvice22" id="LogAdvice22" />
+    <bean class="com.example.biz.common.ReturningAdvice" id="ra" />
+    <bean class="com.example.biz.common.ThrowingAdvice" id="ta" />
+    <bean class="com.example.biz.common.AroundAdvice" id="aa" />
 
 
     <aop:config>
@@ -60,8 +60,13 @@
             <aop:after-returning method="printLog" pointcut-ref="aPoincut" returning="returnObj" />
         </aop:aspect>
         <aop:aspect ref="ta">
-            <aop:after-throwing method="printLog" pointcut-ref="aPoincut" />
+            <aop:after-throwing method="printLog" pointcut-ref="aPoincut" throwing="exceptObj" />
         </aop:aspect>
     </aop:config>
+
+    <context:component-scan base-package="com.example.biz.board.impl" />
+    <context:component-scan base-package="com.example.biz.member.impl" />
+
+    <context:component-scan base-package="com.example.biz.common" />
 
 </beans>
