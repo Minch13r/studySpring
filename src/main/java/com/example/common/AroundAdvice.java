@@ -16,6 +16,11 @@ public class AroundAdvice {
         sw.start();
 
         // 서비스 돌린 다음에~
+        try {
+            pjp.proceed();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
 
         sw.stop();
 
