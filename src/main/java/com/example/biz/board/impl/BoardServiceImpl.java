@@ -34,6 +34,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<BoardVO> getBoardList(BoardVO vo){
+        if(vo==null){
+            throw new IllegalArgumentException("일부로 발생시킨 예외");
+        }
         return boardDAO.getBoardList(vo);
     }
 }
