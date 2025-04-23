@@ -13,7 +13,7 @@ public class ReturningAdvice {
     // printLog 메소드: AfterReturning Advice의 로직이 구현된 메소드
     // JoinPoint: 대상 메소드의 정보를 담고 있음
     // Object returnObj: 대상 메소드가 반환한 값(XML 설정의 returning 속성과 매핑됨)
-    public void printLog(JoinPoint jp, Object returnObj){
+    public void printLog(JoinPoint jp, Object returnObj) {
 
         // AfterReturning Advice 시작 메시지 출력
         System.out.println("RETURNING 공통 ");
@@ -22,13 +22,13 @@ public class ReturningAdvice {
         // instanceof 연산자로 객체의 타입을 확인
 
         // 반환된 객체가 BoardVO 타입인 경우
-        if(returnObj instanceof BoardVO){
+        if (returnObj instanceof BoardVO) {
             // 게시판 서비스에서 반환된 경우 메시지 출력
             System.out.println("service of board");
         }
 
         // 반환된 객체가 MemberVO 타입인 경우
-        else if(returnObj instanceof MemberVO){
+        else if (returnObj instanceof MemberVO) {
             // 회원 서비스에서 반환된 경우 메시지 출력
             System.out.println("service of member");
 
@@ -36,13 +36,16 @@ public class ReturningAdvice {
             MemberVO vo = (MemberVO) returnObj;
 
             // 회원의 역할(role)에 따라 다른 메시지 출력
-            if(vo.getMrole().equals("ADMIN")){
-                // 관리자인 경우
-                System.out.println("Admin");
-            }
-            else {
-                // 일반 회원인 경우
-                System.out.println("Member");
+            if (vo.getMrole() != null) {
+                if (vo.getMrole().equals("ADMIN")) {
+                    // 관리자인 경우
+                    System.out.print("Admin");
+                } else if (vo.getMrole().equals("USER")) {
+                    // 일반 회원인 경우
+                    System.out.print("Member");
+                }
+            } else {
+                System.out.println("Role is not defined");
             }
             // 로그인 관련 메시지 출력 (로그인 서비스에서 호출된 경우)
             System.out.println("login");

@@ -29,11 +29,20 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberVO getMember(MemberVO vo) {
-        return memberDAO.getBoard(vo);
+        MemberVO member = memberDAO.getMember(vo);
+
+        if(member.getMrole().equals("USER")){
+            try {
+                throw new IllegalAccessException("유저 예외");
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return member;
     }
 
     @Override
     public List<MemberVO> getMemberList(MemberVO vo) {
-        return memberDAO.getBoardList(vo);
+        return memberDAO.getMemberList(vo);
     }
 }

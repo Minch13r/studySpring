@@ -1,6 +1,5 @@
 package com.example.biz.member.impl;
 
-import com.example.biz.board.BoardVO;
 import com.example.biz.member.MemberVO;
 import com.example.common.JDBCUtil;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,7 @@ public class MemberDAO {
     private final String INSERT = "INSERT INTO MEMBER (MID, MPW, NAME) VALUES (?, ?, ?)";
     private final String UPDATE = "UPDATE MEMBER SET MPW = ?, NAME = ? WHERE MID = ?";
     private final String DELETE = "DELETE FROM MEMBER WHERE MID = ?";
-    private final String GETONE = "SELECT MID, MPW FROM MEMBER WHERE MID = ?";
+    private final String GETONE = "SELECT MID, MPW, MROLE FROM MEMBER WHERE MID = ?";
     private final String GETALL = "SELECT * FROM MEMBER";
 
     public boolean insert(MemberVO vo) {
@@ -80,7 +79,7 @@ public class MemberDAO {
         }
     }
 
-    public MemberVO getBoard(MemberVO vo) {
+    public MemberVO getMember(MemberVO vo) {
         MemberVO datas = null;
         try {
             conn = JDBCUtil.connect();
@@ -91,6 +90,7 @@ public class MemberDAO {
                 datas = new MemberVO();
                 datas.setMid(rs.getString("MID"));
                 datas.setMpw(rs.getString("MPW"));
+                datas.setMrole(rs.getString("MROLE"));
             }
             return datas;
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class MemberDAO {
         }
     }
 
-    public List<MemberVO> getBoardList(MemberVO vo){
+    public List<MemberVO> getMemberList(MemberVO vo){
         List<MemberVO> datas = new ArrayList<MemberVO>();
         try {
             conn = JDBCUtil.connect();
@@ -112,6 +112,7 @@ public class MemberDAO {
                 memberVO.setMid(rs.getString("MID"));
                 memberVO.setMpw(rs.getString("MPW"));
                 memberVO.setName(rs.getString("NAME"));
+                memberVO.setMrole(rs.getString("MROLE"));
                 datas.add(memberVO);
             }
             return datas;
