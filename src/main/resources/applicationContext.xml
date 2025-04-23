@@ -3,12 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                      http://www.springframework.org/schema/beans/spring-beans.xsd
                      http://www.springframework.org/schema/context
-                     http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+                     http://www.springframework.org/schema/context/spring-context-4.2.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.example"/>
+<!--    <context:component-scan base-package="com.example"/>-->
 
     <!-- Apple apple = new Apple(); -->
     <!-- 달라야 하는 객체인 경우 scope="prototype" 적용 -->
@@ -19,23 +20,48 @@
 
 
 
-    <!-- SamsungRemote -->
-    <!-- 이게 new 하는 코드 -->
-    <bean id="samsungRemote" class="test.SamsungRemote"/>
+<!--    &lt;!&ndash; SamsungRemote &ndash;&gt;-->
+<!--    &lt;!&ndash; 이게 new 하는 코드 &ndash;&gt;-->
+<!--    <bean id="samsungRemote" class="test.SamsungRemote"/>-->
 
-    <!-- SamsungTV 생성자 주입 -->
-    <bean id="samsungTV" class="test.SamsungTV">
-        <constructor-arg ref="samsungRemote"/>
-    </bean>
+<!--    &lt;!&ndash; SamsungTV 생성자 주입 &ndash;&gt;-->
+<!--    <bean id="samsungTV" class="test.SamsungTV">-->
+<!--        <constructor-arg ref="samsungRemote"/>-->
+<!--    </bean>-->
 
 
-    <!-- LgRemote -->
-    <bean id="lgRemote" class="test.LgRemote"/>
+<!--    &lt;!&ndash; LgRemote &ndash;&gt;-->
+<!--    <bean id="lgRemote" class="test.LgRemote"/>-->
 
-    <!-- LgTV setter 주입 -->
-    <bean id="lgTV" class="test.LgTV">
-        <property name="remote" ref="lgRemote"/>
-    </bean>
-    <!-- lazy-init은 빈이 필요한 시점에만 생성-->
+<!--    &lt;!&ndash; LgTV setter 주입 &ndash;&gt;-->
+<!--    <bean id="lgTV" class="test.LgTV">-->
+<!--        <property name="remote" ref="lgRemote"/>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; lazy-init은 빈이 필요한 시점에만 생성&ndash;&gt;-->
+
+    <bean class="com.example.common.LogAdvice" id="LogAdvice" />
+    <bean class="com.example.common.LogAdvice22" id="LogAdvice22" />
+    <bean class="com.example.common.ReturningAdvice" id="ra" />
+    <bean class="com.example.common.ThrowingAdvice" id="ta" />
+    <bean class="com.example.common.AroundAdvice" id="aa" />
+
+
+    <aop:config>
+        <aop:pointcut id="aPoincut" expression="execution(* com.example.biz..*Impl.get*(..))"/>
+        <aop:pointcut id="bPoincut" expression="execution(* com.example.biz..*Impl.*(..))"/>
+
+        <aop:aspect ref="LogAdvice">
+            <aop:before method="printLog" pointcut-ref="bPoincut" />
+        </aop:aspect>
+        <aop:aspect ref="LogAdvice22">
+            <aop:after method="printLog22" pointcut-ref="bPoincut" />
+        </aop:aspect>
+        <aop:aspect ref="ra">
+            <aop:after-returning method="printLog" pointcut-ref="aPoincut" />
+        </aop:aspect>
+        <aop:aspect ref="ta">
+            <aop:after-throwing method="printLog" pointcut-ref="aPoincut" />
+        </aop:aspect>
+    </aop:config>
 
 </beans>
