@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.biz.common;
 
 // AspectJ 라이브러리에서 제공하는 JoinPoint 클래스를 가져옴
 // JoinPoint는 Advice가 적용되는 지점(메소드)의 정보를 담고 있음

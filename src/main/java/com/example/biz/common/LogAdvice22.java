@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.biz.common;
 
 public class LogAdvice22 {
     public void printLog22(){

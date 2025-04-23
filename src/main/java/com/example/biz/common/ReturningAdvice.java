@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.biz.common;
 
 import com.example.biz.board.BoardVO;
 import com.example.biz.member.MemberVO;

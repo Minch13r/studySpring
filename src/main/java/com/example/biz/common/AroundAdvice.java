@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.biz.common;
 
 // ProceedingJoinPoint: AroundAdvice에서만 사용하는 특별한 JoinPoint
 // 대상 메소드를 직접 실행(proceed)할 수 있는 기능을 제공함
