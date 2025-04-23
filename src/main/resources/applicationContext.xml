@@ -57,7 +57,7 @@
             <aop:after method="printLog22" pointcut-ref="bPoincut" />
         </aop:aspect>
         <aop:aspect ref="ra">
-            <aop:after-returning method="printLog" pointcut-ref="aPoincut" />
+            <aop:after-returning method="printLog" pointcut-ref="aPoincut" returning="returnObj" />
         </aop:aspect>
         <aop:aspect ref="ta">
             <aop:after-throwing method="printLog" pointcut-ref="aPoincut" />
