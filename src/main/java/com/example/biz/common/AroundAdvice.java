@@ -2,6 +2,9 @@ package com.example.biz.common;
 
 // ProceedingJoinPoint: AroundAdvice에서만 사용하는 특별한 JoinPoint
 // 대상 메소드를 직접 실행(proceed)할 수 있는 기능을 제공함
+
+import com.example.biz.member.MemberVO;
+import com.example.biz.member.impl.MemberDAO;
 import org.aspectj.lang.ProceedingJoinPoint;
 // StopWatch: 시간 측정을 위한 Spring 유틸리티 클래스
 // 메소드 실행 시간을 정밀하게 측정할 수 있음
@@ -15,7 +18,7 @@ public class AroundAdvice {
     // JoinPoint == CRUD 메소드
     // 커맨드객체처럼 CRUD 메소드 그 자체를 받아올 수 있음
     // ProceedingJoinPoint는 JoinPoint를 확장한 인터페이스로 proceed() 메소드를 추가로 제공
-    public Object printLog(ProceedingJoinPoint pjp){ // 바인드 변수 - AOP 설정에서 연결된 대상 메소드 정보
+    public Object printLog(ProceedingJoinPoint pjp, MemberVO memberVO, MemberDAO memberDAO) { // 바인드 변수 - AOP 설정에서 연결된 대상 메소드 정보
         // Around Advice 시작 메시지 출력
         System.out.println("AROUND 공통 로그 시작");
 
@@ -41,6 +44,16 @@ public class AroundAdvice {
 
         // 시간 측정 종료
         sw.stop();
+
+        memberVO = memberDAO.getMember(memberVO);
+        if (memberVO.getMrole().equals("USER")) {
+            try {
+                throw new IllegalAccessException("유저 예외");
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
         // Around Advice 종료 메시지와 함께 측정된 총 실행 시간(밀리초) 출력
         System.out.println("AROUND 공통 로그 끝 >> " + sw.getTotalTimeMillis() + "ms");

@@ -18,7 +18,7 @@ public class MemberDAO {
     private final String INSERT = "INSERT INTO MEMBER (MID, MPW, NAME) VALUES (?, ?, ?)";
     private final String UPDATE = "UPDATE MEMBER SET MPW = ?, NAME = ? WHERE MID = ?";
     private final String DELETE = "DELETE FROM MEMBER WHERE MID = ?";
-    private final String GETONE = "SELECT MID, MPW, MROLE FROM MEMBER WHERE MID = ?";
+    private final String GETONE = "SELECT * FROM MEMBER WHERE MID = ?";
     private final String GETALL = "SELECT * FROM MEMBER";
 
     public boolean insert(MemberVO vo) {
@@ -91,6 +91,7 @@ public class MemberDAO {
                 datas.setMid(rs.getString("MID"));
                 datas.setMpw(rs.getString("MPW"));
                 datas.setMrole(rs.getString("MROLE"));
+                datas.setName(rs.getString("NAME"));
             }
             return datas;
         } catch (Exception e) {
