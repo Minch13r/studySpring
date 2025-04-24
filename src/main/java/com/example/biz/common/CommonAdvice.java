@@ -52,21 +52,15 @@ public class CommonAdvice {
         System.out.println("RETURNING 공통 ");
 
         if (returnObj instanceof MemberVO) {
-            // 회원 서비스에서 반환된 경우 메시지 출력
             System.out.println("RETURNING 공통 로그");
 
-            // returnObj를 MemberVO 타입으로 캐스팅하여 상세 정보 접근
             MemberVO vo = (MemberVO) returnObj;
 
-            // 회원의 역할(role)에 따라 다른 메시지 출력
             if (vo.getMrole().equals("ADMIN")) {
-                // 관리자인 경우
                 System.out.print("ADMIN ");
             }
             else {
-                // 일반 회원인 경우
                 throw new IllegalArgumentException("USER LOGIN");
-//               System.out.print("사용자가 ");
             }
             // 로그인 관련 메시지 출력 (로그인 서비스에서 호출된 경우)
             System.out.println("LOGIN");
