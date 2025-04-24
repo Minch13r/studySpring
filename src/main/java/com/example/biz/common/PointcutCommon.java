@@ -20,4 +20,9 @@ public class PointcutCommon {
     @Pointcut("execution(* com.example.biz..*Impl.*(..))")
     public void bPointcut() {
     }
+
+    // 회원가입 관련 pointcut
+    @Pointcut("execution(* com.example.biz.member.impl.*Impl.insert(..))")
+    public void signupPointcut(){
+    }
 }
