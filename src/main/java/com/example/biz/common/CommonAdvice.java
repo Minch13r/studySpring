@@ -4,19 +4,17 @@ import com.example.biz.board.BoardVO;
 import com.example.biz.member.MemberVO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
 // service단에서 실행되는 메서드들이라서 @Service 사용
 @Service
+@Aspect
 public class CommonAdvice {
 
     // Before Advice - 메소드 실행 전에 동작
-    @Before("bPointcut()")
+    @Before("PointcutCommon.bPointcut()")
     public void beforeLog(JoinPoint jp) {
         System.out.println("================================");
         System.out.println("BEFORE 공통 로그");
@@ -35,6 +33,7 @@ public class CommonAdvice {
     }
 
     // Around Advice - 메소드 실행 전후에 동작
+    @Around("PointcutCommon.bPointcut()")
     public Object aroundLog(ProceedingJoinPoint pjp) {
         System.out.println("================================");
         System.out.println("AROUND 공통 로그 시작");
@@ -57,7 +56,7 @@ public class CommonAdvice {
 
     // AfterReturning Advice - 메소드가 정상적으로 반환된 후 동작
     // 괄호 안의 인자가 두개 이상이면 그때부터는 return 값 넣어줘야 함.
-    @AfterReturning(pointcut = "aPointcut()", returning = "returnObj")
+    @AfterReturning(pointcut = "PointcutCommon.aPointcut()", returning = "returnObj")
     public void afterReturningLog(JoinPoint jp, Object returnObj) throws Exception {
         System.out.println("================================");
         System.out.println("RETURNING 공통 ");
@@ -80,7 +79,8 @@ public class CommonAdvice {
     }
 
     // AfterThrowing Advice - 메소드에서 예외가 발생했을 때 동작
-    public void afterThrowingLog(JoinPoint jp, Exception exceptObj) throws Exception {
+    @AfterThrowing(pointcut = "PointcutCommon.aPointcut()", throwing = "exceptObj")
+    public void afterThrowingLog(JoinPoint jp, Exception exceptObj) {
         System.out.println("================================");
         System.out.println("THROWING 공통 로그");
 
@@ -93,6 +93,7 @@ public class CommonAdvice {
     }
 
     // 회원가입 전용 Before Advice
+    @Before("PointcutCommon.signupPointcut()")
     public void beforeSignupLog(JoinPoint jp) {
         System.out.println("================================");
         System.out.println("🌟 회원가입 프로세스 시작 🌟");
@@ -108,6 +109,7 @@ public class CommonAdvice {
     }
 
     // 회원가입 후 After Advice
+    @After("PointcutCommon.signupPointcut()")
     public void afterSignupLog(JoinPoint jp) {
         System.out.println("================================");
         Object[] args = jp.getArgs();
@@ -121,6 +123,7 @@ public class CommonAdvice {
     }
 
     // LogAdvice22의 메소드도 통합
+    @After("PointcutCommon.bPointcut()")
     public void printLog22() {
         System.out.println("================================");
         System.out.println("printLog22 반환");
