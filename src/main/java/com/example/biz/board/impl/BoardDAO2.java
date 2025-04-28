@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository("boardDAO")
+@Repository("BoardDAO")
 public class BoardDAO2 {
     @Autowired
     private JdbcTemplate jdbcTemplate;
