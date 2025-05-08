@@ -10,7 +10,7 @@ import java.util.List;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
     @Autowired
-    private MemberDAO memberDAO;
+    private MemberDAO2 memberDAO;
 
     @Override
     public boolean insert(MemberVO vo) {
